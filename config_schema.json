@@ -1,0 +1,96 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema of configuration",
+    "definitions": {
+        "config": {
+            "type": "object",
+            "description": "root configuration object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "name of output file, can include relative path"
+                },
+                "entries": {
+                    "type": "array",
+                    "description": "array of items to be compressed",
+                    "items": {
+                        "$ref": ["#/definitions/file_entry", "#/definitions/zip_entry", "#/definitions/string_entry"]
+                    }
+                }
+            }
+        },
+        "string_entry": {
+            "type": "string",
+            "description": "path to file or directory to include into zip package"
+        },
+        "file_entry": {
+            "type": "object",
+            "description": "item which will be included into zip package",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "type of entry, should be set to 'file' or omitted",
+                    "default": "file",
+                    "enum": [
+                        "zip",
+                        "file"
+                    ]
+                },
+                "name": {
+                    "type": "string",
+                    "description": "path to file or directory to include into zip package"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "path to file or directory which will be used inside zip package"
+                }
+            },
+            "required": [
+                "name",
+                "path"
+            ]
+        },
+        "zip_entry": {
+            "type": "object",
+            "description": "nested zip package",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "type of entry, should be set to 'zip'"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "path to file or directory to include into zip package"
+                },
+                "entries": {
+                    "type": "array",
+                    "description": "array of items to be compressed",
+                    "items": {
+                        "$ref": ["#/definitions/file_entry", "#/definitions/zip_entry", "#/definitions/string_entry"]
+                    }
+                },
+                "ignoreEntries": {
+                    "type": "array",
+                    "description": "array of items to be ignored",
+                    "items": {
+                        "type": "string",
+                        "description": "path or part of the path to a file or folder which should be ignored"
+                    }
+                }
+            },
+            "ignoreEntries": {
+                "type": "array",
+                "description": "array of items to be ignored",
+                "items": {
+                    "type": "string",
+                    "description": "path or part of the path to a file or folder which should be ignored"
+                }
+            },
+            "required": [
+                "name",
+                "type",
+                "entries"
+            ]
+        }
+    }
+}
