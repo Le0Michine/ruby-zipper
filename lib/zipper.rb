@@ -3,6 +3,7 @@ require "zipper/fileEntryType"
 require "zipper/fileEntry"
 require "zipper/zipEntry"
 require "zipper/JsonConfigKey"
+require "zipper/cli"
 require "zip"
 
 module Zipper
@@ -45,7 +46,7 @@ module Zipper
             if File.directory? directory_or_file
                 get_dir_entries_recursively(directory_or_file, entry_path, ignore_entries)
             else
-                FileEntry.new(directory_or_file, FileEntryType::FILE, false, entry_path)
+                FileEntry.new(directory_or_file, false, entry_path)
             end
         end
 
@@ -61,7 +62,7 @@ module Zipper
                     get_dir_entries_recursively(path, entry_path, ignore_entries, replace_path)
                 else
                     entry_path_in_zip = (entry_path.nil? ? path : path.sub(replace_path, entry_path)).gsub(/^[\/\\]+/, "")
-                    FileEntry.new(path, FileEntryType::FILE, false, entry_path_in_zip)
+                    FileEntry.new(path, false, entry_path_in_zip)
                 end
             }
         end
@@ -71,10 +72,10 @@ module Zipper
         # +entries+:: array of +FileEntry+ and +ZipEntry+ objects
         def compress(entries)
             puts "\nadding the following entries into zip package"
-            puts "#{ entries.map{ |x| x.name + ", " + x.path.to_s + ", " + x.type.to_s }.join("\n")}"
+            puts "#{ entries.map{ |x| x.name }.join("\n")}"
             buffer = Zip::File.add_buffer do |zio|
                 entries.each do |file|
-                    if file.is_a FileEntry
+                    if file.is_a? FileEntry
                         zio.add(file.path == nil ? file.name : file.path, file.name)
                     else
                         zio.get_output_stream(file.name) { |os| os.write file.buffer.string }
@@ -96,7 +97,7 @@ module Zipper
                 elsif x[JsonConfigKey::Type].casecmp(FileEntryType::ZIP) == 0
                     ZipEntry.new(x[JsonConfigKey::Name], create_zip(x[JsonConfigKey::Entries], x[JsonConfigKey::IgnoreEntries]))
                 end
-            }.flatten.select{ |f| filter_entries(f.name, f.type, ignore_entries) }.uniq{ |f| f.name })
+            }.flatten.select{ |f| f.is_a?(ZipEntry) || filter_entries(f.name, FileEntryType::FILE, ignore_entries) }.uniq{ |f| f.name })
         end
     end
 end

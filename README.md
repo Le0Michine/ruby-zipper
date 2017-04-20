@@ -7,7 +7,7 @@ Utility intended to simplify zip packages creating.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'zipper'
+gem 'zipbundler'
 ```
 
 And then execute:
@@ -16,15 +16,15 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install zipper
+    $ gem install zipbundler
 
 ## Usage
 
-First you need to create an instance of `ZipFileGenerator`:
+It is possible to run utility form console:
 
-    ZipFileGenerator.new(json_config)
+    zipbundler zip config.json
 
-`json_config` is a hash variable which can be simply created from a json file. It should has the following structure:
+Configuration file `config.json` should has the following structure:
 
     {
         "name": "out.zip",
@@ -51,6 +51,18 @@ First you need to create an instance of `ZipFileGenerator`:
         ]
     }
 
+Please refer [this link](https://github.com/Le0Michine/zipper/config_schema.json) to find full json schema of the configuration.
+
+Or you can do it from code `ZipFileGenerator`:
+
+    require 'zipper'
+
+    ...
+
+    ZipFileGenerator.new(json_config).write
+
+`json_config` is a hash variable which should have the same structure as json config file above.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -59,7 +71,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/zipper. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Le0Michine/zipper. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
