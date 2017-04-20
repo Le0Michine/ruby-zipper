@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Creates zip packages with complex structure.}
   spec.description   = %q{Creates zip packages with complex structure.}
-  spec.homepage      = "https://github.com/Le0Michine/zipper"
+  spec.homepage      = "https://github.com/Le0Michine/ruby-zipper"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|

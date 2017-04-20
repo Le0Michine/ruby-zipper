@@ -51,7 +51,7 @@ Configuration file `config.json` should has the following structure:
         ]
     }
 
-Please refer [this link](https://github.com/Le0Michine/zipper/config_schema.json) to find full json schema of the configuration.
+Please refer [this link](https://github.com/Le0Michine/ruby-zipper/config_schema.json) to find full json schema of the configuration.
 
 Or you can do it from code `ZipFileGenerator`:
 
@@ -71,7 +71,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Le0Michine/zipper. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Le0Michine/ruby-zipper. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
