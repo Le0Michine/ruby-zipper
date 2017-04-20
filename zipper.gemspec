@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'zipper/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "zipper"
+  spec.name          = "zipbundler"
   spec.version       = Zipper::VERSION
   spec.authors       = ["Le0Michine"]
   spec.email         = ["leomichine@gmail.com"]
