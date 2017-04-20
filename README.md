@@ -51,7 +51,7 @@ Configuration file `config.json` should has the following structure:
         ]
     }
 
-Please refer [this link](https://github.com/Le0Michine/ruby-zipper/config_schema.json) to find full json schema of the configuration.
+Please refer [this link](https://github.com/Le0Michine/ruby-zipper/blob/master/config_schema.json) to find full json schema of the configuration.
 
 Or you can do it from code `ZipFileGenerator`:
 
